@@ -10,10 +10,6 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    confirmpass: {
-      type: String,
-      required: true,
-    },
     firstname: {
       type: String,
       required: true,
@@ -32,6 +28,7 @@ const userSchema = mongoose.Schema(
     livesin: String,
     worksAt: String,
     relationship: String,
+    country: String,
     followers: [],
     following: [],
   },

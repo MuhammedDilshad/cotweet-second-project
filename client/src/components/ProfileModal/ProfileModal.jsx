@@ -1,7 +1,63 @@
 import { Modal, useMantineTheme } from "@mantine/core";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { updateUser } from "../../actions/userAction";
+import { uploadImage } from "../../actions/uploadAction";
 
-function ProfileModal({ modalOpened, setModalOpened }) {
+function ProfileModal({ modalOpened, setModalOpened, data }) {
   const theme = useMantineTheme();
+  const { password, ...other } = data;
+  const [formData, setFormData] = useState(other);
+  const [profileImage, setProfileImage] = useState(null);
+  const [coverImage, setCoverImage] = useState(null);
+  const dispatch = useDispatch();
+  const param = useParams();
+  const { user } = useSelector((state) => state.authReducer.authData);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      let img = event.target.files[0];
+      event.target.name === "profileImage"
+        ? setProfileImage(img)
+        : setCoverImage(img);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let UserData = formData;
+    if (profileImage) {
+      const data = new FormData();
+      const fileName = Date.now() + profileImage.name;
+      data.append("name", fileName);
+      data.append("file", profileImage);
+      UserData.profilePicture = fileName;
+      try {
+        dispatch(uploadImage(data));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    if (coverImage) {
+      const data = new FormData();
+      const fileName = Date.now() + coverImage.name;
+      data.append("name", fileName);
+      data.append("file", coverImage);
+      UserData.coverPicture = fileName;
+      try {
+        dispatch(uploadImage(data));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    dispatch(updateUser(param.id, UserData));
+    setModalOpened(false);
+  };
 
   return (
     <Modal
@@ -24,20 +80,26 @@ function ProfileModal({ modalOpened, setModalOpened }) {
             className="infoInput"
             name="firstname"
             placeholder="FirstName"
+            onChange={handleChange}
+            value={formData.firstname}
           />
           <input
             type="text"
             className="infoInput"
             name="lastname"
             placeholder="LastName"
+            onChange={handleChange}
+            value={formData.lastname}
           />
         </div>
         <div>
           <input
             type="text"
-            placeholder="User Name"
+            placeholder="WorksAt"
             className="infoInput"
-            name="username"
+            name="worksAt"
+            onChange={handleChange}
+            value={formData.worksAt}
           />
         </div>
         <div>
@@ -46,29 +108,47 @@ function ProfileModal({ modalOpened, setModalOpened }) {
             placeholder="Lives In"
             className="infoInput"
             name="livesin"
+            onChange={handleChange}
+            value={formData.livesin}
           />
           <input
             type="text"
             placeholder="Country"
             className="infoInput"
             name="country"
+            onChange={handleChange}
+            value={formData.country}
           />
         </div>
         <div>
           <input
-            type="email"
-            placeholder="Email"
+            type="text"
+            placeholder="Relation Status"
             className="infoInput"
-            name="email"
+            name="relationship"
+            onChange={handleChange}
+            value={formData.relationship}
           />
         </div>
         <div>
           Profile Image
-          <input type="file" className="infoInput" name="profileimage" />
+          <input
+            type="file"
+            className="infoInput"
+            name="profileImage"
+            onChange={onImageChange}
+          />
           Cover Image
-          <input type="file" className="infoInput" name="coverimage" />
+          <input
+            type="file"
+            className="infoInput"
+            name="coverImage"
+            onChange={onImageChange}
+          />
         </div>
-        <button className="button infoButton">Update</button>
+        <button className="button infoButton" onClick={handleSubmit}>
+          Update
+        </button>
       </form>
     </Modal>
   );

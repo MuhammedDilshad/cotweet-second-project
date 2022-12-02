@@ -10,7 +10,7 @@ import { signUp } from "../../actions/AuthActions";
 
 const Auth = () => {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.authReducer.loading);
+  const loading = useSelector((state) => state.authReducer?.loading);
   const [isSignUp, setSignUp] = useState(true);
   console.log(loading);
   const [data, setData] = useState({

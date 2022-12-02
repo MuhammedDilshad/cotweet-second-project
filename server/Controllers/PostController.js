@@ -6,10 +6,9 @@ import mongoose from "mongoose";
 
 export const createPost = async (req, res) => {
   const newPost = new PostModel(req.body);
-
   try {
     await newPost.save();
-    res.status(200).json("Post created");
+    res.status(200).json(newPost);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -18,6 +17,7 @@ export const createPost = async (req, res) => {
 // get a post
 
 export const getPost = async (req, res) => {
+  console.log("get post");
   const id = req.params.id;
 
   try {
@@ -83,6 +83,7 @@ export const likePost = async (req, res) => {
 
 // Get Timeline Posts
 export const getTimelinePosts = async (req, res) => {
+  console.log("htgrsdhtdgr");
   const userId = req.params.id;
 
   try {
