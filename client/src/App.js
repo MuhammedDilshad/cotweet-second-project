@@ -5,13 +5,13 @@ import Home from "./pages/home/Home";
 import Profile from "./pages/Profile/Profile";
 import { useSelector } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
+import Chat from "./pages/Chat/Chat";
 
 function App() {
-  console.log("dilsggfdfjfghj");
   const user = useSelector((state) => state.authReducer.authData);
   // const user = null;
   // const user = true;
-  // useTitle("Cotweet");
+  useTitle("Cotweet");
   return (
     <div className="App">
       <div className="blur" style={{ top: "-8%", right: "0" }}></div>
@@ -35,6 +35,11 @@ function App() {
         <Route
           path="/profile/:id"
           element={user ? <Profile /> : <Navigate to="../auth" />}
+        />
+
+        <Route
+          path="/chat"
+          element={user ? <Chat /> : <Navigate to="../auth" />}
         />
       </Routes>
     </div>

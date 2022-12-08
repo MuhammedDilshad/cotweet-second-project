@@ -10,11 +10,12 @@ function Posts() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.authReducer.authData);
   let { posts, loading } = useSelector((state) => state.postReducer);
+  const refresh = useSelector((state) => state.postReducer.refresh);
   const params = useParams();
 
   useEffect(() => {
     dispatch(getTimelinePosts(user._id));
-  }, []);
+  }, [refresh]);
 
   if (!posts) return "no Post";
   if (params.id) posts.filter((post) => post.userId === params.id);
@@ -24,7 +25,6 @@ function Posts() {
       {loading
         ? "fetching Posts..."
         : posts.map((post, id) => {
-            console.log(post);
             return <Post data={post} id={id} />;
           })}
     </div>

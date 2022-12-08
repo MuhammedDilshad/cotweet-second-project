@@ -22,7 +22,7 @@ function FollowersCard() {
       <h3>People you may know</h3>
 
       {persons.map((person, id) => {
-        if (persons._id !== user._id) {
+        if (person._id !== user._id) {
           return <User person={person} key={id} />;
         }
       })}

@@ -17,7 +17,6 @@ export const createPost = async (req, res) => {
 // get a post
 
 export const getPost = async (req, res) => {
-  console.log("get post");
   const id = req.params.id;
 
   try {
@@ -48,7 +47,7 @@ export const updatePost = async (req, res) => {
 // delete a post
 export const deletePost = async (req, res) => {
   const id = req.params.id;
-  const { userId } = req.body;
+  const userId = req.params.uid;
 
   try {
     const post = await PostModel.findById(id);
@@ -116,6 +115,32 @@ export const getTimelinePosts = async (req, res) => {
           return b.createdAt - a.createdAt;
         })
     );
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+//Add comment
+
+export const addComment = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const post = await PostModel.findById(postId);
+    if (req.body.comment == null) {
+      return res.json({ message: "Add any comment" });
+    }
+    let commented = await PostModel.updateOne(
+      { _id: postId },
+      {
+        $push: {
+          comments: {
+            comment: req.body.comment,
+            commentBy: req.body.userId,
+          },
+        },
+      }
+    );
+    res.json(commented);
   } catch (error) {
     res.status(500).json(error);
   }
