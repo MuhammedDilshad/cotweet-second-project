@@ -1,12 +1,10 @@
 import React from "react";
 import "./Auth.scss";
-import Logo from "../../img/logo.png";
+import Logo from "../../img/newlogo.png";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "../../actions/AuthActions";
 import { signUp } from "../../actions/AuthActions";
-// import { Form, Formik } from "formik";
-// import * as Yup from "yup";
 
 const Auth = () => {
   const dispatch = useDispatch();
@@ -60,8 +58,7 @@ const Auth = () => {
           <h6>Explore the world</h6>
         </div>
       </div>
-      {/* <SignUp /> */}
-      {/* <Login /> */}
+
       {/* right Side */}
       <div className="a-right">
         <form className="infoForm authForm" onSubmit={handleSubmit}>

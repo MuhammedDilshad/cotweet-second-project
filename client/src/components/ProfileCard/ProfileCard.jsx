@@ -72,7 +72,7 @@ function ProfileCard({ location }) {
       ) : (
         <span>
           <Link
-            style={{ textDecoration: "none", color: "inherit" }}
+            style={{ textDecoration: "none", color: "green" }}
             to={`/profile/${user._id}`}
           >
             My profile

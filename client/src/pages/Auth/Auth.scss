@@ -32,7 +32,8 @@
 .Webname {
   h1 {
     font-size: 3rem;
-    background-color: red;
+    // background-color: red;
+    background-color: rgb(14, 81, 203);
     background-image: var(--buttonBg);
     background-size: 100%;
     background-repeat: repeat;
@@ -97,40 +98,3 @@
 .error {
   color: red;
 }
-
-// .Auth > div {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
-
-/* left side */
-
-// .a-left {
-// }
-
-// .a-left >
-
-// .Webname > h1 {
-//   font-size: 3rem;
-//   background-color: red;
-//   background-image: var(--buttonBg);
-//   background-size: 100%;
-//   background-repeat: repeat;
-//   -webkit-background-clip: text;
-//   -webkit-text-fill-color: transparent;
-//   -moz-background-clip: text;
-// }
-
-// .Webname > h6 {
-//   font-size: 0.85rem;
-// }
-
-// .infoInput {
-//   border: none;
-//   outline: none;
-//   background-color: var(--inputColor);
-//   border-radius: 8px;
-//   padding: 20px;
-//   flex: 1;
-// }

@@ -82,27 +82,7 @@ const Post = ({ data }) => {
           alt=""
           style={{ cursor: "pointer" }}
         />
-        {/* <img src={Share} alt="" />
-        <img
-          src={Dot}
-          style={{ cursor: "pointer", width: "30px" }}
-          onClick={() => handleModal()}
-          alt=""
-        /> */}
       </div>
-      {/* <Modal
-        overlayColor={
-          theme.colorScheme === "dark"
-            ? theme.colors.dark[9]
-            : theme.colors.gray[2]
-        }
-        title="choose your choice"
-        overlayOpacity={0.55}
-        overlayBlur={3}
-        size="30%"
-        opened={modalOpened}
-        onClose={() => setModalOpened(false)}
-      /> */}
 
       {openComment && (
         <div>
